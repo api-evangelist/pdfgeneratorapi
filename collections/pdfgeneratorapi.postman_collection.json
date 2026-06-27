@@ -1,0 +1,257 @@
+{
+  "info": {
+    "name": "PDF Generator API",
+    "description": "Template-based document and PDF generation API. Merge JSON data with reusable templates to produce documents synchronously, asynchronously, or in batches, manage templates and data fields, and partition work across multi-tenant workspaces. Authenticated with a short-lived JWT (HS256) using your API secret, with your API key as the issuer and the workspace identifier as the subject.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      { "key": "token", "value": "{{jwt}}", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://us1.pdfgeneratorapi.com/api/v4" },
+    { "key": "jwt", "value": "" },
+    { "key": "templateId", "value": "" },
+    { "key": "publicId", "value": "" },
+    { "key": "jobId", "value": "" },
+    { "key": "workspaceIdentifier", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Templates",
+      "item": [
+        {
+          "name": "Get Templates",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/templates", "host": ["{{baseUrl}}"], "path": ["templates"] }
+          }
+        },
+        {
+          "name": "Create Template",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Invoice\",\n  \"layout\": {},\n  \"pages\": []\n}" },
+            "url": { "raw": "{{baseUrl}}/templates", "host": ["{{baseUrl}}"], "path": ["templates"] }
+          }
+        },
+        {
+          "name": "Get Template",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/templates/{{templateId}}", "host": ["{{baseUrl}}"], "path": ["templates", "{{templateId}}"] }
+          }
+        },
+        {
+          "name": "Update Template",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"Updated Invoice\"\n}" },
+            "url": { "raw": "{{baseUrl}}/templates/{{templateId}}", "host": ["{{baseUrl}}"], "path": ["templates", "{{templateId}}"] }
+          }
+        },
+        {
+          "name": "Delete Template",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/templates/{{templateId}}", "host": ["{{baseUrl}}"], "path": ["templates", "{{templateId}}"] }
+          }
+        },
+        {
+          "name": "Copy Template",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/templates/{{templateId}}/copy", "host": ["{{baseUrl}}"], "path": ["templates", "{{templateId}}", "copy"] }
+          }
+        },
+        {
+          "name": "Get Template Data Fields",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/templates/{{templateId}}/data", "host": ["{{baseUrl}}"], "path": ["templates", "{{templateId}}", "data"] }
+          }
+        },
+        {
+          "name": "Open Editor",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"data\": {}\n}" },
+            "url": { "raw": "{{baseUrl}}/templates/{{templateId}}/editor", "host": ["{{baseUrl}}"], "path": ["templates", "{{templateId}}", "editor"] }
+          }
+        },
+        {
+          "name": "Import Template",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{}" },
+            "url": { "raw": "{{baseUrl}}/templates/import", "host": ["{{baseUrl}}"], "path": ["templates", "import"] }
+          }
+        },
+        {
+          "name": "Validate Template",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{}" },
+            "url": { "raw": "{{baseUrl}}/templates/validate", "host": ["{{baseUrl}}"], "path": ["templates", "validate"] }
+          }
+        },
+        {
+          "name": "Get Template Schema",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/templates/schema", "host": ["{{baseUrl}}"], "path": ["templates", "schema"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Documents",
+      "item": [
+        {
+          "name": "Generate Document",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"template\": { \"id\": 12345, \"data\": {} },\n  \"format\": \"pdf\",\n  \"output\": \"base64\"\n}" },
+            "url": { "raw": "{{baseUrl}}/documents/generate", "host": ["{{baseUrl}}"], "path": ["documents", "generate"] }
+          }
+        },
+        {
+          "name": "Generate Document Async",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"template\": { \"id\": 12345, \"data\": {} },\n  \"format\": \"pdf\"\n}" },
+            "url": { "raw": "{{baseUrl}}/documents/generate/async", "host": ["{{baseUrl}}"], "path": ["documents", "generate", "async"] }
+          }
+        },
+        {
+          "name": "Generate Document Batch",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "[\n  { \"template\": { \"id\": 12345, \"data\": {} } }\n]" },
+            "url": { "raw": "{{baseUrl}}/documents/generate/batch", "host": ["{{baseUrl}}"], "path": ["documents", "generate", "batch"] }
+          }
+        },
+        {
+          "name": "Generate Document Batch Async",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "[\n  { \"template\": { \"id\": 12345, \"data\": {} } }\n]" },
+            "url": { "raw": "{{baseUrl}}/documents/generate/batch/async", "host": ["{{baseUrl}}"], "path": ["documents", "generate", "batch", "async"] }
+          }
+        },
+        {
+          "name": "Get Async Job Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/documents/async/{{jobId}}", "host": ["{{baseUrl}}"], "path": ["documents", "async", "{{jobId}}"] }
+          }
+        },
+        {
+          "name": "Get Documents",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/documents", "host": ["{{baseUrl}}"], "path": ["documents"] }
+          }
+        },
+        {
+          "name": "Store Document",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{}" },
+            "url": { "raw": "{{baseUrl}}/documents", "host": ["{{baseUrl}}"], "path": ["documents"] }
+          }
+        },
+        {
+          "name": "Get Document",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/documents/{{publicId}}", "host": ["{{baseUrl}}"], "path": ["documents", "{{publicId}}"] }
+          }
+        },
+        {
+          "name": "Get Document Actions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/documents/{{publicId}}/actions", "host": ["{{baseUrl}}"], "path": ["documents", "{{publicId}}", "actions"] }
+          }
+        },
+        {
+          "name": "Delete Document",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/documents/{{publicId}}/actions", "host": ["{{baseUrl}}"], "path": ["documents", "{{publicId}}", "actions"] }
+          }
+        },
+        {
+          "name": "Get Document Versions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/documents/{{publicId}}/versions", "host": ["{{baseUrl}}"], "path": ["documents", "{{publicId}}", "versions"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Workspaces",
+      "item": [
+        {
+          "name": "Get Workspaces",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/workspaces", "host": ["{{baseUrl}}"], "path": ["workspaces"] }
+          }
+        },
+        {
+          "name": "Create Workspace",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"identifier\": \"customer-123\"\n}" },
+            "url": { "raw": "{{baseUrl}}/workspaces", "host": ["{{baseUrl}}"], "path": ["workspaces"] }
+          }
+        },
+        {
+          "name": "Get Workspace",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/workspaces/{{workspaceIdentifier}}", "host": ["{{baseUrl}}"], "path": ["workspaces", "{{workspaceIdentifier}}"] }
+          }
+        },
+        {
+          "name": "Delete Workspace",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/workspaces/{{workspaceIdentifier}}", "host": ["{{baseUrl}}"], "path": ["workspaces", "{{workspaceIdentifier}}"] }
+          }
+        }
+      ]
+    }
+  ]
+}

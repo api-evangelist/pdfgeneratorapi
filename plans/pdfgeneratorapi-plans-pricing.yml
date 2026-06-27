@@ -1,0 +1,189 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: PDF Generator API
+providerId: pdfgeneratorapi
+created: '2026-06-25'
+modified: '2026-06-25'
+reconciled: true
+tags:
+- PDF
+- Document Generation
+- Templates
+- Reporting
+- Workspaces
+- Plans
+description: >-
+  PDF Generator API uses tiered subscription plans (billed annually) metered
+  primarily by monthly document credits, with per-plan caps on the number of
+  templates and workspaces. Individual plans (Creator, Low Usage) target single
+  users; Team plans (Starter, Basic, Professional, Premium, Enterprise) add
+  workspaces and advanced template management. All paid plans include a 14-day
+  free trial and unlimited test documents. Prices are listed in EUR.
+notes: >-
+  Prices and credit/template/workspace limits as published on the pricing page
+  with annual billing; verify the current catalog at pdfgeneratorapi.com/pricing
+  during reconciliation. One document credit is consumed per generated document.
+sources:
+- https://pdfgeneratorapi.com/pricing
+- https://docs.pdfgeneratorapi.com/v4/
+plans:
+- id: pdfgeneratorapi-creator
+  name: Creator
+  type: subscription
+  description: >-
+    Individual plan with 50 monthly document credits and up to 5 templates.
+  entries:
+  - label: Subscription
+    name: creator
+    type: flat
+    metric: documents
+    limit: 50
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: EUR 80 / year
+    userMultiplied: false
+  elements:
+  - name: 50 documents / month
+  - name: 5 templates
+  - name: Unlimited test documents
+  - name: 14-day free trial
+- id: pdfgeneratorapi-low-usage
+  name: Low Usage
+  type: subscription
+  description: >-
+    Individual plan with 250 monthly document credits and up to 10 templates.
+  entries:
+  - label: Subscription
+    name: low_usage
+    type: flat
+    metric: documents
+    limit: 250
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: EUR 260 / year
+    userMultiplied: false
+  elements:
+  - name: 250 documents / month
+  - name: 10 templates
+  - name: Unlimited test documents
+  - name: 14-day free trial
+- id: pdfgeneratorapi-starter
+  name: Starter
+  type: subscription
+  description: >-
+    Team plan with 1,000 monthly document credits, 25 templates, and 10 workspaces.
+  entries:
+  - label: Subscription
+    name: starter
+    type: flat
+    metric: documents
+    limit: 1000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: EUR 520 / year
+    userMultiplied: false
+  elements:
+  - name: 1,000 documents / month
+  - name: 25 templates
+  - name: 10 workspaces
+  - name: Unlimited test documents
+  - name: 14-day free trial
+- id: pdfgeneratorapi-basic
+  name: Basic
+  type: subscription
+  description: >-
+    Team plan with 5,000 monthly document credits, 100 templates, and 100 workspaces.
+  entries:
+  - label: Subscription
+    name: basic
+    type: flat
+    metric: documents
+    limit: 5000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: EUR 880 / year
+    userMultiplied: false
+  elements:
+  - name: 5,000 documents / month
+  - name: 100 templates
+  - name: 100 workspaces
+  - name: Unlimited test documents
+  - name: 14-day free trial
+- id: pdfgeneratorapi-professional
+  name: Professional
+  type: subscription
+  description: >-
+    Team plan with 15,000 monthly document credits, unlimited templates and
+    workspaces, and advanced template management.
+  entries:
+  - label: Subscription
+    name: professional
+    type: flat
+    metric: documents
+    limit: 15000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: EUR 1770 / year
+    userMultiplied: false
+  elements:
+  - name: 15,000 documents / month
+  - name: Unlimited templates
+  - name: Unlimited workspaces
+  - name: Advanced template management
+  - name: Unlimited test documents
+  - name: 14-day free trial
+- id: pdfgeneratorapi-premium
+  name: Premium
+  type: subscription
+  description: >-
+    Team plan with 50,000 monthly document credits and unlimited templates and
+    workspaces.
+  entries:
+  - label: Subscription
+    name: premium
+    type: flat
+    metric: documents
+    limit: 50000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: EUR 3550 / year
+    userMultiplied: false
+  elements:
+  - name: 50,000 documents / month
+  - name: Unlimited templates
+  - name: Unlimited workspaces
+  - name: Unlimited test documents
+  - name: 14-day free trial
+- id: pdfgeneratorapi-enterprise
+  name: Enterprise
+  type: subscription
+  description: >-
+    Highest published tier with 250,000 monthly document credits and unlimited
+    templates and workspaces.
+  entries:
+  - label: Subscription
+    name: enterprise
+    type: flat
+    metric: documents
+    limit: 250000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: EUR 6208 / year
+    userMultiplied: false
+  elements:
+  - name: 250,000 documents / month
+  - name: Unlimited templates
+  - name: Unlimited workspaces
+  - name: Unlimited test documents
+  - name: 14-day free trial
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

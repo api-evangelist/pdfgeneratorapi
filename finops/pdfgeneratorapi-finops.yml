@@ -1,0 +1,96 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: PDF Generator API
+providerId: pdfgeneratorapi
+created: '2026-06-25'
+modified: '2026-06-25'
+reconciled: true
+tags:
+- PDF
+- Document Generation
+- Templates
+- Reporting
+- Workspaces
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of PDF Generator API spend. PDF Generator API bills via tiered
+  annual subscriptions metered by monthly document credits (one credit per
+  generated document), with per-plan caps on templates and workspaces. Test
+  documents are unlimited and do not consume credits. The main cost driver is
+  monthly document volume, so selecting the right credit tier and avoiding
+  unnecessary production generations are the primary optimization levers.
+notes: >-
+  Subscription prices and credit allotments are subject to change; verify
+  against the pricing page during reconciliation. Costs are published in EUR.
+sources:
+- https://pdfgeneratorapi.com/pricing
+- https://docs.pdfgeneratorapi.com/v4/
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: PDF Generator API
+serviceCategory: Developer Tools and Document Automation
+billingModel:
+  pricingCategory: Subscription-Based
+  billingFrequency: Annual
+  billingCurrency: EUR
+  chargeCategories:
+  - Usage
+  - Purchase
+focusColumns:
+  ServiceName: PDF Generator API
+  ServiceCategory: Developer Tools and Document Automation
+  ProviderName: PDF Generator API
+  PublisherName: PDF Generator API
+  InvoiceIssuerName: PDF Generator API
+  BillingCurrency: EUR
+  ChargeCategory: Purchase
+  PricingCategory: Subscription-Based
+meters:
+- name: document_credits
+  description: Documents generated against the monthly credit allotment; one credit per generated document.
+  unit: documents
+  aggregation: sum
+  dimensions:
+  - account
+  - workspace
+  - plan
+- name: templates
+  description: Stored templates counted against the per-plan template cap.
+  unit: templates
+  aggregation: max
+  dimensions:
+  - account
+  - workspace
+- name: workspaces
+  description: Active workspaces counted against the per-plan workspace cap.
+  unit: workspaces
+  aggregation: max
+  dimensions:
+  - account
+- name: test_documents
+  description: Test documents generated for development; unlimited and not billed.
+  unit: documents
+  aggregation: sum
+  dimensions:
+  - account
+  - workspace
+principles:
+- name: Visibility
+  description: Track monthly document credit burn per workspace against the plan allotment.
+- name: Allocation
+  description: Use per-customer workspaces to attribute document generation to the right cost center.
+- name: Optimization
+  description: Use unlimited test documents during development; right-size the credit tier to actual monthly volume; batch generations to reduce overhead.
+- name: Accountability
+  description: Assign owners per workspace and review document credit consumption against the subscription tier before renewal.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

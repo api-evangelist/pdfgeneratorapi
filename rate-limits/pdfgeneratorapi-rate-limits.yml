@@ -1,0 +1,62 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: PDF Generator API
+providerId: pdfgeneratorapi
+created: '2026-06-25'
+modified: '2026-06-25'
+reconciled: false
+tags:
+- PDF
+- Document Generation
+- Templates
+- Reporting
+- Workspaces
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  PDF Generator API meters usage primarily through monthly document credits
+  (one credit per generated document) and per-plan caps on templates and
+  workspaces, rather than publishing fixed per-second request rate limits in
+  its developer documentation. Authentication tokens (JWT) are short-lived and
+  must be regenerated frequently. Specific per-second/per-minute request
+  throttling values are not reconciled in this artifact.
+notes: >-
+  Verify any request throttling, concurrency limits on async/batch generation,
+  and credit overage behavior against the developer docs and account settings
+  during reconciliation. Test documents do not consume monthly credits.
+sources:
+- https://docs.pdfgeneratorapi.com/v4/
+- https://pdfgeneratorapi.com/pricing
+responseCodes:
+  throttled: 429
+limits:
+- name: Monthly Document Credits
+  scope: account
+  metric: documents
+  limit: per plan (50 to 250,000 per month)
+  notes: One credit consumed per generated document; varies by subscription plan.
+- name: Templates
+  scope: account
+  metric: templates
+  limit: per plan (5 to unlimited)
+  notes: Maximum stored templates allowed, varies by plan.
+- name: Workspaces
+  scope: account
+  metric: workspaces
+  limit: per plan (10 to unlimited on Team plans)
+  notes: Maximum concurrent workspaces, available on Team plans.
+- name: Request Throttling
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: Per-second/per-minute request limits are not published; not reconciled.
+policies:
+- name: Token Expiration
+  description: JWTs are short-lived (seconds to minutes); clients must regenerate tokens frequently.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on 429 responses.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

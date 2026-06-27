@@ -1,0 +1,78 @@
+aid: pdfgeneratorapi
+name: PDF Generator API
+review:
+  question: Does PDF Generator API expose a documented public WebSocket API?
+  answer: false
+  date: '2026-06-25'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. PDF Generator API does not document any
+    streaming transport (WebSocket or Server-Sent Events). Asynchronous
+    document generation is delivered via HTTP callbacks (webhooks) to a
+    caller-supplied URL plus a pollable async job-status endpoint, neither of
+    which is a persistent streaming connection in AsyncAPI's typical scope.
+findings:
+  summary: |
+    PDF Generator API does not publish a documented public WebSocket API. The
+    v4 platform is a REST (HTTPS) API under
+    https://us1.pdfgeneratorapi.com/api/v4, authenticated with short-lived
+    JWTs (HS256). Asynchronous work is handled with the
+    /documents/generate/async and /documents/generate/batch/async endpoints,
+    which accept a callback URL and are polled via
+    /documents/async/{jobId}. There is no realtime, bidirectional, or
+    streaming WebSocket (ws:// or wss://) surface documented.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://us1.pdfgeneratorapi.com/api/v4
+      documented: true
+    - protocol: Webhook
+      scheme: https
+      note: Async generation posts results to a caller-supplied callback URL on completion. Outbound HTTP callback, not WebSocket.
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in the PDF Generator API v4 reference or developer portal as of the review date.
+  endpointsConfirmedRest:
+    - GET    https://us1.pdfgeneratorapi.com/api/v4/templates
+    - POST   https://us1.pdfgeneratorapi.com/api/v4/templates
+    - GET    https://us1.pdfgeneratorapi.com/api/v4/templates/{templateId}
+    - PUT    https://us1.pdfgeneratorapi.com/api/v4/templates/{templateId}
+    - DELETE https://us1.pdfgeneratorapi.com/api/v4/templates/{templateId}
+    - POST   https://us1.pdfgeneratorapi.com/api/v4/templates/{templateId}/copy
+    - GET    https://us1.pdfgeneratorapi.com/api/v4/templates/{templateId}/data
+    - POST   https://us1.pdfgeneratorapi.com/api/v4/templates/{templateId}/editor
+    - POST   https://us1.pdfgeneratorapi.com/api/v4/templates/import
+    - POST   https://us1.pdfgeneratorapi.com/api/v4/templates/validate
+    - GET    https://us1.pdfgeneratorapi.com/api/v4/templates/schema
+    - POST   https://us1.pdfgeneratorapi.com/api/v4/documents/generate
+    - POST   https://us1.pdfgeneratorapi.com/api/v4/documents/generate/async
+    - POST   https://us1.pdfgeneratorapi.com/api/v4/documents/generate/batch
+    - POST   https://us1.pdfgeneratorapi.com/api/v4/documents/generate/batch/async
+    - GET    https://us1.pdfgeneratorapi.com/api/v4/documents/async/{jobId}
+    - GET    https://us1.pdfgeneratorapi.com/api/v4/documents
+    - POST   https://us1.pdfgeneratorapi.com/api/v4/documents
+    - GET    https://us1.pdfgeneratorapi.com/api/v4/documents/{publicId}
+    - GET    https://us1.pdfgeneratorapi.com/api/v4/documents/{publicId}/actions
+    - DELETE https://us1.pdfgeneratorapi.com/api/v4/documents/{publicId}/actions
+    - GET    https://us1.pdfgeneratorapi.com/api/v4/documents/{publicId}/versions
+    - GET    https://us1.pdfgeneratorapi.com/api/v4/workspaces
+    - POST   https://us1.pdfgeneratorapi.com/api/v4/workspaces
+    - GET    https://us1.pdfgeneratorapi.com/api/v4/workspaces/{workspaceIdentifier}
+    - DELETE https://us1.pdfgeneratorapi.com/api/v4/workspaces/{workspaceIdentifier}
+sources:
+  - url: https://docs.pdfgeneratorapi.com/v4/
+    type: Documentation
+    note: v4 developer portal; lists REST base URL and JWT auth; no WebSocket mentioned.
+  - url: https://github.com/pdfgeneratorapi/php-client
+    type: SDK
+    note: Auto-generated from the OpenAPI v3 spec; documents all REST operations across templates, documents, and workspaces.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists and no streaming (SSE/WebSocket)
+    transport is documented. Asynchronous generation uses HTTP callbacks and a
+    pollable job-status endpoint, so no AsyncAPI document was authored.

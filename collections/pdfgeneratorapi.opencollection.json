@@ -1,0 +1,160 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PDF Generator API",
+    "version": "4.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{jwt}}"
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Templates", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get Templates", "type": "http" },
+          "http": { "method": "GET", "url": "https://us1.pdfgeneratorapi.com/api/v4/templates" },
+          "docs": "Returns a list of templates available to the authenticated workspace."
+        },
+        {
+          "info": { "name": "Create Template", "type": "http" },
+          "http": { "method": "POST", "url": "https://us1.pdfgeneratorapi.com/api/v4/templates", "body": { "type": "json", "data": "{}" } },
+          "docs": "Creates a new template."
+        },
+        {
+          "info": { "name": "Get Template", "type": "http" },
+          "http": { "method": "GET", "url": "https://us1.pdfgeneratorapi.com/api/v4/templates/{{templateId}}" },
+          "docs": "Retrieves the configuration of a single template."
+        },
+        {
+          "info": { "name": "Update Template", "type": "http" },
+          "http": { "method": "PUT", "url": "https://us1.pdfgeneratorapi.com/api/v4/templates/{{templateId}}", "body": { "type": "json", "data": "{}" } },
+          "docs": "Updates the configuration of an existing template."
+        },
+        {
+          "info": { "name": "Delete Template", "type": "http" },
+          "http": { "method": "DELETE", "url": "https://us1.pdfgeneratorapi.com/api/v4/templates/{{templateId}}" },
+          "docs": "Removes a template from the workspace."
+        },
+        {
+          "info": { "name": "Copy Template", "type": "http" },
+          "http": { "method": "POST", "url": "https://us1.pdfgeneratorapi.com/api/v4/templates/{{templateId}}/copy" },
+          "docs": "Creates a copy of a template into the authenticated workspace."
+        },
+        {
+          "info": { "name": "Get Template Data Fields", "type": "http" },
+          "http": { "method": "GET", "url": "https://us1.pdfgeneratorapi.com/api/v4/templates/{{templateId}}/data" },
+          "docs": "Returns all data fields referenced within a template."
+        },
+        {
+          "info": { "name": "Open Editor", "type": "http" },
+          "http": { "method": "POST", "url": "https://us1.pdfgeneratorapi.com/api/v4/templates/{{templateId}}/editor", "body": { "type": "json", "data": "{}" } },
+          "docs": "Generates a unique URL that opens the browser-based template editor."
+        },
+        {
+          "info": { "name": "Import Template", "type": "http" },
+          "http": { "method": "POST", "url": "https://us1.pdfgeneratorapi.com/api/v4/templates/import", "body": { "type": "json", "data": "{}" } },
+          "docs": "Creates a template from an existing PDF."
+        },
+        {
+          "info": { "name": "Validate Template", "type": "http" },
+          "http": { "method": "POST", "url": "https://us1.pdfgeneratorapi.com/api/v4/templates/validate", "body": { "type": "json", "data": "{}" } },
+          "docs": "Validates whether a template configuration matches the template JSON schema."
+        },
+        {
+          "info": { "name": "Get Template Schema", "type": "http" },
+          "http": { "method": "GET", "url": "https://us1.pdfgeneratorapi.com/api/v4/templates/schema" },
+          "docs": "Returns the JSON Schema that defines the structure of a template."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Documents", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Generate Document", "type": "http" },
+          "http": { "method": "POST", "url": "https://us1.pdfgeneratorapi.com/api/v4/documents/generate", "body": { "type": "json", "data": "{}" } },
+          "docs": "Merges a template with data and returns the document as base64 or a public URL."
+        },
+        {
+          "info": { "name": "Generate Document Async", "type": "http" },
+          "http": { "method": "POST", "url": "https://us1.pdfgeneratorapi.com/api/v4/documents/generate/async", "body": { "type": "json", "data": "{}" } },
+          "docs": "Merges a template with data as an asynchronous job with a callback URL."
+        },
+        {
+          "info": { "name": "Generate Document Batch", "type": "http" },
+          "http": { "method": "POST", "url": "https://us1.pdfgeneratorapi.com/api/v4/documents/generate/batch", "body": { "type": "json", "data": "[]" } },
+          "docs": "Merges multiple templates with data into a single document."
+        },
+        {
+          "info": { "name": "Generate Document Batch Async", "type": "http" },
+          "http": { "method": "POST", "url": "https://us1.pdfgeneratorapi.com/api/v4/documents/generate/batch/async", "body": { "type": "json", "data": "[]" } },
+          "docs": "Batch document generation executed as an asynchronous job with a callback."
+        },
+        {
+          "info": { "name": "Get Async Job Status", "type": "http" },
+          "http": { "method": "GET", "url": "https://us1.pdfgeneratorapi.com/api/v4/documents/async/{{jobId}}" },
+          "docs": "Returns the current status of an asynchronous document generation job."
+        },
+        {
+          "info": { "name": "Get Documents", "type": "http" },
+          "http": { "method": "GET", "url": "https://us1.pdfgeneratorapi.com/api/v4/documents" },
+          "docs": "Returns a list of generated documents stored in PDF Generator API."
+        },
+        {
+          "info": { "name": "Store Document", "type": "http" },
+          "http": { "method": "POST", "url": "https://us1.pdfgeneratorapi.com/api/v4/documents", "body": { "type": "json", "data": "{}" } },
+          "docs": "Uploads a PDF to Document Storage via URL or base64-encoded string."
+        },
+        {
+          "info": { "name": "Get Document", "type": "http" },
+          "http": { "method": "GET", "url": "https://us1.pdfgeneratorapi.com/api/v4/documents/{{publicId}}" },
+          "docs": "Retrieves a single document from Document Storage."
+        },
+        {
+          "info": { "name": "Get Document Actions", "type": "http" },
+          "http": { "method": "GET", "url": "https://us1.pdfgeneratorapi.com/api/v4/documents/{{publicId}}/actions" },
+          "docs": "Returns a list of actions performed on a stored document."
+        },
+        {
+          "info": { "name": "Delete Document", "type": "http" },
+          "http": { "method": "DELETE", "url": "https://us1.pdfgeneratorapi.com/api/v4/documents/{{publicId}}/actions" },
+          "docs": "Removes a document from Document Storage."
+        },
+        {
+          "info": { "name": "Get Document Versions", "type": "http" },
+          "http": { "method": "GET", "url": "https://us1.pdfgeneratorapi.com/api/v4/documents/{{publicId}}/versions" },
+          "docs": "Returns a list of versions for a stored document."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Workspaces", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Get Workspaces", "type": "http" },
+          "http": { "method": "GET", "url": "https://us1.pdfgeneratorapi.com/api/v4/workspaces" },
+          "docs": "Returns all workspaces in the organization."
+        },
+        {
+          "info": { "name": "Create Workspace", "type": "http" },
+          "http": { "method": "POST", "url": "https://us1.pdfgeneratorapi.com/api/v4/workspaces", "body": { "type": "json", "data": "{}" } },
+          "docs": "Creates a regular workspace with the identifier specified in the request."
+        },
+        {
+          "info": { "name": "Get Workspace", "type": "http" },
+          "http": { "method": "GET", "url": "https://us1.pdfgeneratorapi.com/api/v4/workspaces/{{workspaceIdentifier}}" },
+          "docs": "Returns workspace information for the workspace identifier specified."
+        },
+        {
+          "info": { "name": "Delete Workspace", "type": "http" },
+          "http": { "method": "DELETE", "url": "https://us1.pdfgeneratorapi.com/api/v4/workspaces/{{workspaceIdentifier}}" },
+          "docs": "Removes a workspace (regular workspaces only)."
+        }
+      ]
+    }
+  ]
+}
