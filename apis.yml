@@ -109,6 +109,10 @@ apis:
   description: Return all data fields referenced inside a template so integrators
     can discover the data structure a template expects before merging it with data.
 common:
+- type: DomainSecurity
+  url: security/pdfgeneratorapi-domain-security.yml
+- type: Authentication
+  url: authentication/pdfgeneratorapi-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/pdfgeneratorapi
 - type: LinkedIn
@@ -123,6 +127,8 @@ common:
   url: rate-limits/pdfgeneratorapi-rate-limits.yml
 - type: FinOps
   url: finops/pdfgeneratorapi-finops.yml
+- url: https://pdfgeneratorapi.com/blog
+  type: Blog
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
