@@ -109,6 +109,8 @@ apis:
   description: Return all data fields referenced inside a template so integrators
     can discover the data structure a template expects before merging it with data.
 common:
+- type: AgenticAccess
+  url: agentic-access/pdfgeneratorapi-agentic-access.yml
 - type: DomainSecurity
   url: security/pdfgeneratorapi-domain-security.yml
 - type: Authentication
