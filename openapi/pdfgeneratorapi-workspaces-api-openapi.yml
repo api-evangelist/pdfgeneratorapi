@@ -1,0 +1,112 @@
+openapi: 3.0.1
+info:
+  title: PDF Generator Documents Workspaces API
+  description: Template-based document and PDF generation API. Merge JSON data with reusable templates to produce PDFs and other documents synchronously, asynchronously, or in batches, manage templates and their data fields, and partition work across multi-tenant workspaces. All requests are authenticated with a short-lived JSON Web Token (JWT) signed (HS256) using your API secret, with your API key as the issuer (iss) and the workspace identifier as the subject (sub).
+  termsOfService: https://pdfgeneratorapi.com/terms
+  contact:
+    name: PDF Generator API Support
+    url: https://pdfgeneratorapi.com
+    email: support@pdfgeneratorapi.com
+  version: '4.0'
+servers:
+- url: https://us1.pdfgeneratorapi.com/api/v4
+  description: Production base URL
+security:
+- JWT: []
+tags:
+- name: Workspaces
+  description: Manage multi-tenant workspaces within the organization.
+paths:
+  /workspaces:
+    get:
+      operationId: getWorkspaces
+      tags:
+      - Workspaces
+      summary: Get all workspaces
+      description: Returns all workspaces in the organization.
+      responses:
+        '200':
+          description: A list of workspaces.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Workspace'
+    post:
+      operationId: createWorkspace
+      tags:
+      - Workspaces
+      summary: Create workspace
+      description: Creates a regular workspace with the identifier specified in the request.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Workspace'
+      responses:
+        '201':
+          description: The created workspace.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workspace'
+  /workspaces/{workspaceIdentifier}:
+    get:
+      operationId: getWorkspace
+      tags:
+      - Workspaces
+      summary: Get workspace
+      description: Returns workspace information for the workspace identifier specified.
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceIdentifier'
+      responses:
+        '200':
+          description: The requested workspace.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workspace'
+    delete:
+      operationId: deleteWorkspace
+      tags:
+      - Workspaces
+      summary: Delete workspace
+      description: Removes a workspace (regular workspaces only).
+      parameters:
+      - $ref: '#/components/parameters/WorkspaceIdentifier'
+      responses:
+        '200':
+          description: Workspace deleted.
+components:
+  schemas:
+    Workspace:
+      type: object
+      properties:
+        id:
+          type: integer
+        identifier:
+          type: string
+          description: Workspace identifier, typically the end customer's unique key.
+        created_at:
+          type: string
+        updated_at:
+          type: string
+  parameters:
+    WorkspaceIdentifier:
+      name: workspaceIdentifier
+      in: path
+      required: true
+      description: Identifier of the workspace.
+      schema:
+        type: string
+  securitySchemes:
+    JWT:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Short-lived JSON Web Token signed with HS256 using your API secret. Claims: iss (API key), sub (workspace identifier), exp (expiration).'
