@@ -6,7 +6,20 @@ description: PDF Generator API is a template-based document and PDF generation s
   A drag-and-drop browser template editor plus a REST API let developers merge JSON
   data with reusable templates to produce PDFs, HTML, and other documents synchronously,
   asynchronously, or in batches, organized across multi-tenant workspaces.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: true
+  try_now: true
+  public: false
+  label: Paid (free trial) · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/pdfgeneratorapi.png
 tags:
 - PDF
 - Document Generation
@@ -17,97 +30,72 @@ created: '2026-06-25'
 modified: '2026-06-25'
 specificationVersion: '0.19'
 apis:
-- aid: pdfgeneratorapi:pdfgeneratorapi-templates-api
-  name: PDF Generator API Templates API
-  tags:
-  - Templates
-  - Editor
-  - Schema
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+- aid: pdfgeneratorapi:pdfgeneratorapi-documents-api
+  name: PDF Generator API Documents API
+  description: Generate, store, and retrieve documents.
   humanURL: https://docs.pdfgeneratorapi.com/v4/
   baseURL: https://us1.pdfgeneratorapi.com/api/v4
-  properties:
-  - url: https://docs.pdfgeneratorapi.com/v4/
-    type: Documentation
-  - url: https://docs.pdfgeneratorapi.com/v4/#tag/Templates
-    type: APIReference
-  - url: openapi/pdfgeneratorapi-openapi.yml
-    type: OpenAPI
-  - url: collections/pdfgeneratorapi.postman_collection.json
-    type: PostmanCollection
-  - url: collections/pdfgeneratorapi.opencollection.json
-    type: OpenCollection
-  description: List, get, create, copy, update, delete, import, and validate reusable
-    document templates, retrieve the template JSON schema, and open the browser-based
-    drag-and-drop template editor via a signed editor URL.
-- aid: pdfgeneratorapi:pdfgeneratorapi-documents-generate-api
-  name: PDF Generator API Documents / Generate API
   tags:
   - Documents
-  - Generate
-  - Batch
-  - Async
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  properties:
+  - type: OpenAPI
+    url: openapi/pdfgeneratorapi-documents-api-openapi.yml
+  - type: Documentation
+    url: https://docs.pdfgeneratorapi.com/v4/
+  - type: APIReference
+    url: https://docs.pdfgeneratorapi.com/v4/#tag/Templates
+  - type: PostmanCollection
+    url: collections/pdfgeneratorapi.postman_collection.json
+  - type: OpenCollection
+    url: collections/pdfgeneratorapi.opencollection.json
+  - type: APIReference
+    url: https://docs.pdfgeneratorapi.com/v4/#tag/Documents
+  - type: APIReference
+    url: https://docs.pdfgeneratorapi.com/v4/#tag/Workspaces
+- aid: pdfgeneratorapi:pdfgeneratorapi-templates-api
+  name: PDF Generator API Templates API
+  description: Manage reusable document templates and the template editor.
   humanURL: https://docs.pdfgeneratorapi.com/v4/
   baseURL: https://us1.pdfgeneratorapi.com/api/v4
+  tags:
+  - Templates
   properties:
-  - url: https://docs.pdfgeneratorapi.com/v4/
-    type: Documentation
-  - url: https://docs.pdfgeneratorapi.com/v4/#tag/Documents
-    type: APIReference
-  - url: openapi/pdfgeneratorapi-openapi.yml
-    type: OpenAPI
-  - url: collections/pdfgeneratorapi.postman_collection.json
-    type: PostmanCollection
-  - url: collections/pdfgeneratorapi.opencollection.json
-    type: OpenCollection
-  description: Merge templates with JSON data to generate documents synchronously,
-    asynchronously with a callback, or in batches, plus store, list, retrieve, and
-    delete documents from Document Storage and poll async job status.
+  - type: OpenAPI
+    url: openapi/pdfgeneratorapi-templates-api-openapi.yml
+  - type: Documentation
+    url: https://docs.pdfgeneratorapi.com/v4/
+  - type: APIReference
+    url: https://docs.pdfgeneratorapi.com/v4/#tag/Templates
+  - type: PostmanCollection
+    url: collections/pdfgeneratorapi.postman_collection.json
+  - type: OpenCollection
+    url: collections/pdfgeneratorapi.opencollection.json
+  - type: APIReference
+    url: https://docs.pdfgeneratorapi.com/v4/#tag/Documents
+  - type: APIReference
+    url: https://docs.pdfgeneratorapi.com/v4/#tag/Workspaces
 - aid: pdfgeneratorapi:pdfgeneratorapi-workspaces-api
   name: PDF Generator API Workspaces API
+  description: Manage multi-tenant workspaces within the organization.
+  humanURL: https://docs.pdfgeneratorapi.com/v4/
+  baseURL: https://us1.pdfgeneratorapi.com/api/v4
   tags:
   - Workspaces
-  - Multi-Tenant
-  - Organization
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.pdfgeneratorapi.com/v4/
-  baseURL: https://us1.pdfgeneratorapi.com/api/v4
   properties:
-  - url: https://docs.pdfgeneratorapi.com/v4/
-    type: Documentation
-  - url: https://docs.pdfgeneratorapi.com/v4/#tag/Workspaces
-    type: APIReference
-  - url: openapi/pdfgeneratorapi-openapi.yml
-    type: OpenAPI
-  - url: collections/pdfgeneratorapi.postman_collection.json
-    type: PostmanCollection
-  - url: collections/pdfgeneratorapi.opencollection.json
-    type: OpenCollection
-  description: Create, list, retrieve, and delete the multi-tenant workspaces that
-    partition templates and documents per end customer within an organization account.
-- aid: pdfgeneratorapi:pdfgeneratorapi-data-fields-api
-  name: PDF Generator API Data Fields API
-  tags:
-  - Data Fields
-  - Schema
-  - Templates
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.pdfgeneratorapi.com/v4/
-  baseURL: https://us1.pdfgeneratorapi.com/api/v4
-  properties:
-  - url: https://docs.pdfgeneratorapi.com/v4/
-    type: Documentation
-  - url: https://docs.pdfgeneratorapi.com/v4/#tag/Templates
-    type: APIReference
-  - url: openapi/pdfgeneratorapi-openapi.yml
-    type: OpenAPI
-  - url: collections/pdfgeneratorapi.postman_collection.json
-    type: PostmanCollection
-  - url: collections/pdfgeneratorapi.opencollection.json
-    type: OpenCollection
-  description: Return all data fields referenced inside a template so integrators
-    can discover the data structure a template expects before merging it with data.
+  - type: OpenAPI
+    url: openapi/pdfgeneratorapi-workspaces-api-openapi.yml
+  - type: Documentation
+    url: https://docs.pdfgeneratorapi.com/v4/
+  - type: APIReference
+    url: https://docs.pdfgeneratorapi.com/v4/#tag/Templates
+  - type: PostmanCollection
+    url: collections/pdfgeneratorapi.postman_collection.json
+  - type: OpenCollection
+    url: collections/pdfgeneratorapi.opencollection.json
+  - type: APIReference
+    url: https://docs.pdfgeneratorapi.com/v4/#tag/Documents
+  - type: APIReference
+    url: https://docs.pdfgeneratorapi.com/v4/#tag/Workspaces
 common:
 - type: AgenticAccess
   url: agentic-access/pdfgeneratorapi-agentic-access.yml
