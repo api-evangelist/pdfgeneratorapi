@@ -1,0 +1,652 @@
+openapi: 3.0.1
+info:
+  title: PDF Generator API
+  description: >-
+    Template-based document and PDF generation API. Merge JSON data with
+    reusable templates to produce PDFs and other documents synchronously,
+    asynchronously, or in batches, manage templates and their data fields,
+    and partition work across multi-tenant workspaces. All requests are
+    authenticated with a short-lived JSON Web Token (JWT) signed (HS256)
+    using your API secret, with your API key as the issuer (iss) and the
+    workspace identifier as the subject (sub).
+  termsOfService: https://pdfgeneratorapi.com/terms
+  contact:
+    name: PDF Generator API Support
+    url: https://pdfgeneratorapi.com
+    email: support@pdfgeneratorapi.com
+  version: '4.0'
+servers:
+  - url: https://us1.pdfgeneratorapi.com/api/v4
+    description: Production base URL
+security:
+  - JWT: []
+tags:
+  - name: Templates
+    description: Manage reusable document templates and the template editor.
+  - name: Documents
+    description: Generate, store, and retrieve documents.
+  - name: Workspaces
+    description: Manage multi-tenant workspaces within the organization.
+paths:
+  /templates:
+    get:
+      operationId: getTemplates
+      tags:
+        - Templates
+      summary: Get all templates
+      description: Returns a list of templates available to the authenticated workspace.
+      parameters:
+        - name: access
+          in: query
+          schema:
+            type: string
+            enum: [organization, private]
+        - name: tags
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of templates.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Template'
+    post:
+      operationId: createTemplate
+      tags:
+        - Templates
+      summary: Create template
+      description: Creates a new template in the authenticated workspace.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TemplateDefinition'
+      responses:
+        '201':
+          description: The created template.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateResponse'
+  /templates/{templateId}:
+    get:
+      operationId: getTemplate
+      tags:
+        - Templates
+      summary: Get template
+      description: Retrieves the configuration of a single template.
+      parameters:
+        - $ref: '#/components/parameters/TemplateId'
+      responses:
+        '200':
+          description: The requested template.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateResponse'
+    put:
+      operationId: updateTemplate
+      tags:
+        - Templates
+      summary: Update template
+      description: Updates the configuration of an existing template.
+      parameters:
+        - $ref: '#/components/parameters/TemplateId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TemplateDefinition'
+      responses:
+        '200':
+          description: The updated template.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateResponse'
+    delete:
+      operationId: deleteTemplate
+      tags:
+        - Templates
+      summary: Delete template
+      description: Removes a template from the workspace.
+      parameters:
+        - $ref: '#/components/parameters/TemplateId'
+      responses:
+        '200':
+          description: Template deleted.
+  /templates/{templateId}/copy:
+    post:
+      operationId: copyTemplate
+      tags:
+        - Templates
+      summary: Copy template
+      description: Creates a copy of a template into the workspace specified in the authentication parameters.
+      parameters:
+        - $ref: '#/components/parameters/TemplateId'
+        - name: name
+          in: query
+          schema:
+            type: string
+      responses:
+        '201':
+          description: The copied template.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateResponse'
+  /templates/{templateId}/data:
+    get:
+      operationId: getTemplateData
+      tags:
+        - Templates
+      summary: Get template data fields
+      description: Returns all data fields referenced within a template.
+      parameters:
+        - $ref: '#/components/parameters/TemplateId'
+      responses:
+        '200':
+          description: A list of data fields used by the template.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: array
+                    items:
+                      type: string
+  /templates/{templateId}/editor:
+    post:
+      operationId: openEditor
+      tags:
+        - Templates
+      summary: Open template editor
+      description: Generates a unique URL that opens the browser-based template editor for a template.
+      parameters:
+        - $ref: '#/components/parameters/TemplateId'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditorData'
+      responses:
+        '200':
+          description: A unique editor URL.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: string
+                    format: uri
+  /templates/import:
+    post:
+      operationId: importTemplate
+      tags:
+        - Templates
+      summary: Import template
+      description: Creates a template from an existing PDF.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '201':
+          description: The imported template.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateResponse'
+  /templates/validate:
+    post:
+      operationId: validateTemplate
+      tags:
+        - Templates
+      summary: Validate template
+      description: Validates whether the provided template configuration matches the template JSON schema.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TemplateDefinition'
+      responses:
+        '200':
+          description: Validation result.
+  /templates/schema:
+    get:
+      operationId: getTemplateSchema
+      tags:
+        - Templates
+      summary: Get template schema
+      description: Returns the JSON Schema that defines the structure of a template.
+      responses:
+        '200':
+          description: The template JSON schema.
+          content:
+            application/json:
+              schema:
+                type: object
+  /documents/generate:
+    post:
+      operationId: generateDocument
+      tags:
+        - Documents
+      summary: Generate document
+      description: Merges a template with data and returns the document as a base64-encoded string or a public URL.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateRequest'
+      responses:
+        '200':
+          description: The generated document.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateResponse'
+  /documents/generate/async:
+    post:
+      operationId: generateDocumentAsync
+      tags:
+        - Documents
+      summary: Generate document asynchronously
+      description: Merges a template with data as an asynchronous job and notifies a callback URL on completion.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateRequest'
+      responses:
+        '200':
+          description: The accepted async job.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncJobResponse'
+  /documents/generate/batch:
+    post:
+      operationId: generateDocumentBatch
+      tags:
+        - Documents
+      summary: Generate batch of documents
+      description: Merges multiple templates with data into a single document.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/GenerateRequest'
+      responses:
+        '200':
+          description: The generated document.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenerateResponse'
+  /documents/generate/batch/async:
+    post:
+      operationId: generateDocumentBatchAsync
+      tags:
+        - Documents
+      summary: Generate batch of documents asynchronously
+      description: Batch document generation executed as an asynchronous job with a callback.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/GenerateRequest'
+      responses:
+        '200':
+          description: The accepted async job.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncJobResponse'
+  /documents/async/{jobId}:
+    get:
+      operationId: getAsyncJobStatus
+      tags:
+        - Documents
+      summary: Get async job status
+      description: Returns the current status of an asynchronous document generation job.
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The async job status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AsyncJobResponse'
+  /documents:
+    get:
+      operationId: getDocuments
+      tags:
+        - Documents
+      summary: Get documents
+      description: Returns a list of generated documents created by the authorized workspace and stored in PDF Generator API.
+      responses:
+        '200':
+          description: A list of stored documents.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Document'
+    post:
+      operationId: storeDocument
+      tags:
+        - Documents
+      summary: Store document
+      description: Uploads a PDF to Document Storage via a URL or a base64-encoded string.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '201':
+          description: The stored document.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+  /documents/{publicId}:
+    get:
+      operationId: getDocument
+      tags:
+        - Documents
+      summary: Get document
+      description: Retrieves a single document from Document Storage.
+      parameters:
+        - $ref: '#/components/parameters/PublicId'
+      responses:
+        '200':
+          description: The requested document.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+  /documents/{publicId}/actions:
+    get:
+      operationId: getDocumentActions
+      tags:
+        - Documents
+      summary: Get document actions
+      description: Returns a list of actions performed on a stored document.
+      parameters:
+        - $ref: '#/components/parameters/PublicId'
+      responses:
+        '200':
+          description: A list of document actions.
+    delete:
+      operationId: deleteDocument
+      tags:
+        - Documents
+      summary: Delete document
+      description: Removes a document from Document Storage.
+      parameters:
+        - $ref: '#/components/parameters/PublicId'
+      responses:
+        '200':
+          description: Document deleted.
+  /documents/{publicId}/versions:
+    get:
+      operationId: getDocumentVersions
+      tags:
+        - Documents
+      summary: Get document versions
+      description: Returns a list of versions for a stored document.
+      parameters:
+        - $ref: '#/components/parameters/PublicId'
+      responses:
+        '200':
+          description: A list of document versions.
+  /workspaces:
+    get:
+      operationId: getWorkspaces
+      tags:
+        - Workspaces
+      summary: Get all workspaces
+      description: Returns all workspaces in the organization.
+      responses:
+        '200':
+          description: A list of workspaces.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Workspace'
+    post:
+      operationId: createWorkspace
+      tags:
+        - Workspaces
+      summary: Create workspace
+      description: Creates a regular workspace with the identifier specified in the request.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Workspace'
+      responses:
+        '201':
+          description: The created workspace.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workspace'
+  /workspaces/{workspaceIdentifier}:
+    get:
+      operationId: getWorkspace
+      tags:
+        - Workspaces
+      summary: Get workspace
+      description: Returns workspace information for the workspace identifier specified.
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceIdentifier'
+      responses:
+        '200':
+          description: The requested workspace.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workspace'
+    delete:
+      operationId: deleteWorkspace
+      tags:
+        - Workspaces
+      summary: Delete workspace
+      description: Removes a workspace (regular workspaces only).
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceIdentifier'
+      responses:
+        '200':
+          description: Workspace deleted.
+components:
+  securitySchemes:
+    JWT:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >-
+        Short-lived JSON Web Token signed with HS256 using your API secret.
+        Claims: iss (API key), sub (workspace identifier), exp (expiration).
+  parameters:
+    TemplateId:
+      name: templateId
+      in: path
+      required: true
+      description: Unique identifier of the template.
+      schema:
+        type: integer
+    PublicId:
+      name: publicId
+      in: path
+      required: true
+      description: Public identifier of a stored document.
+      schema:
+        type: string
+    WorkspaceIdentifier:
+      name: workspaceIdentifier
+      in: path
+      required: true
+      description: Identifier of the workspace.
+      schema:
+        type: string
+  schemas:
+    Template:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier.
+        name:
+          type: string
+          description: Template name.
+        owner:
+          type: boolean
+          description: Whether the template is owned by the authenticated workspace.
+        tags:
+          type: array
+          items:
+            type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+    TemplateResponse:
+      type: object
+      properties:
+        response:
+          $ref: '#/components/schemas/Template'
+        meta:
+          type: object
+    TemplateDefinition:
+      type: object
+      properties:
+        name:
+          type: string
+        layout:
+          type: object
+        pages:
+          type: array
+          items:
+            type: object
+    EditorData:
+      type: object
+      properties:
+        data:
+          type: object
+          description: Sample data to preview inside the editor.
+    GenerateRequest:
+      type: object
+      required:
+        - template
+        - data
+      properties:
+        template:
+          type: object
+          properties:
+            id:
+              type: integer
+            data:
+              type: object
+        format:
+          type: string
+          enum: [pdf, html, zip, xlsx]
+          default: pdf
+        output:
+          type: string
+          enum: [base64, url, file, i]
+          default: base64
+        name:
+          type: string
+        data:
+          type: object
+          description: JSON data merged into the template.
+    GenerateResponse:
+      type: object
+      properties:
+        response:
+          type: string
+          description: Base64-encoded document or a public URL, depending on output.
+        meta:
+          type: object
+          properties:
+            name:
+              type: string
+            display_name:
+              type: string
+            encoding:
+              type: string
+            output_type:
+              type: string
+    AsyncJobResponse:
+      type: object
+      properties:
+        response:
+          type: object
+          properties:
+            job_id:
+              type: string
+            status:
+              type: string
+              enum: [pending, processing, completed, failed]
+    Document:
+      type: object
+      properties:
+        public_id:
+          type: string
+        name:
+          type: string
+        created_at:
+          type: string
+    Workspace:
+      type: object
+      properties:
+        id:
+          type: integer
+        identifier:
+          type: string
+          description: Workspace identifier, typically the end customer's unique key.
+        created_at:
+          type: string
+        updated_at:
+          type: string

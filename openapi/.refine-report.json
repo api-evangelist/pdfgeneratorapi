@@ -1,0 +1,18 @@
+{
+  "provider": "pdfgeneratorapi",
+  "sources": [
+    "pdfgeneratorapi-documents-api-openapi.yml",
+    "pdfgeneratorapi-templates-api-openapi.yml",
+    "pdfgeneratorapi-workspaces-api-openapi.yml"
+  ],
+  "outputs": [
+    "pdfgeneratorapi-documents-api-openapi.yml",
+    "pdfgeneratorapi-templates-api-openapi.yml",
+    "pdfgeneratorapi-workspaces-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
