@@ -1,0 +1,204 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PDF Generator Documents API",
+    "version": "4.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Generate document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us1.pdfgeneratorapi.com/api/v4/documents/generate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Merges a template with data and returns the document as a base64-encoded string or a public URL."
+        },
+        {
+          "info": {
+            "name": "Generate document asynchronously",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us1.pdfgeneratorapi.com/api/v4/documents/generate/async",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Merges a template with data as an asynchronous job and notifies a callback URL on completion."
+        },
+        {
+          "info": {
+            "name": "Generate batch of documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us1.pdfgeneratorapi.com/api/v4/documents/generate/batch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Merges multiple templates with data into a single document."
+        },
+        {
+          "info": {
+            "name": "Generate batch of documents asynchronously",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us1.pdfgeneratorapi.com/api/v4/documents/generate/batch/async",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Batch document generation executed as an asynchronous job with a callback."
+        },
+        {
+          "info": {
+            "name": "Get async job status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us1.pdfgeneratorapi.com/api/v4/documents/async/:jobId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the current status of an asynchronous document generation job."
+        },
+        {
+          "info": {
+            "name": "Get documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us1.pdfgeneratorapi.com/api/v4/documents"
+          },
+          "docs": "Returns a list of generated documents created by the authorized workspace and stored in PDF Generator API."
+        },
+        {
+          "info": {
+            "name": "Store document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us1.pdfgeneratorapi.com/api/v4/documents",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Uploads a PDF to Document Storage via a URL or a base64-encoded string."
+        },
+        {
+          "info": {
+            "name": "Get document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us1.pdfgeneratorapi.com/api/v4/documents/:publicId",
+            "params": [
+              {
+                "name": "publicId",
+                "value": "",
+                "type": "path",
+                "description": "Public identifier of a stored document."
+              }
+            ]
+          },
+          "docs": "Retrieves a single document from Document Storage."
+        },
+        {
+          "info": {
+            "name": "Get document actions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us1.pdfgeneratorapi.com/api/v4/documents/:publicId/actions",
+            "params": [
+              {
+                "name": "publicId",
+                "value": "",
+                "type": "path",
+                "description": "Public identifier of a stored document."
+              }
+            ]
+          },
+          "docs": "Returns a list of actions performed on a stored document."
+        },
+        {
+          "info": {
+            "name": "Delete document",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us1.pdfgeneratorapi.com/api/v4/documents/:publicId/actions",
+            "params": [
+              {
+                "name": "publicId",
+                "value": "",
+                "type": "path",
+                "description": "Public identifier of a stored document."
+              }
+            ]
+          },
+          "docs": "Removes a document from Document Storage."
+        },
+        {
+          "info": {
+            "name": "Get document versions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us1.pdfgeneratorapi.com/api/v4/documents/:publicId/versions",
+            "params": [
+              {
+                "name": "publicId",
+                "value": "",
+                "type": "path",
+                "description": "Public identifier of a stored document."
+              }
+            ]
+          },
+          "docs": "Returns a list of versions for a stored document."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

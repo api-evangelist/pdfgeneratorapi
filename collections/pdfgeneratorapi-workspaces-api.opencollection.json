@@ -1,0 +1,88 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PDF Generator Documents Workspaces API",
+    "version": "4.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Workspaces",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all workspaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us1.pdfgeneratorapi.com/api/v4/workspaces"
+          },
+          "docs": "Returns all workspaces in the organization."
+        },
+        {
+          "info": {
+            "name": "Create workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://us1.pdfgeneratorapi.com/api/v4/workspaces",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a regular workspace with the identifier specified in the request."
+        },
+        {
+          "info": {
+            "name": "Get workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://us1.pdfgeneratorapi.com/api/v4/workspaces/:workspaceIdentifier",
+            "params": [
+              {
+                "name": "workspaceIdentifier",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the workspace."
+              }
+            ]
+          },
+          "docs": "Returns workspace information for the workspace identifier specified."
+        },
+        {
+          "info": {
+            "name": "Delete workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://us1.pdfgeneratorapi.com/api/v4/workspaces/:workspaceIdentifier",
+            "params": [
+              {
+                "name": "workspaceIdentifier",
+                "value": "",
+                "type": "path",
+                "description": "Identifier of the workspace."
+              }
+            ]
+          },
+          "docs": "Removes a workspace (regular workspaces only)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

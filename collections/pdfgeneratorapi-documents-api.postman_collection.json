@@ -1,0 +1,1088 @@
+{
+  "item": [
+    {
+      "id": "65f51e5d-55fc-44ea-93bb-437c6936e98c",
+      "name": "Documents",
+      "description": {
+        "content": "Generate, store, and retrieve documents.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9e991bcf-5c6a-4872-a992-08e3d25385c1",
+          "name": "Generate document",
+          "request": {
+            "name": "Generate document",
+            "description": {
+              "content": "Merges a template with data and returns the document as a base64-encoded string or a public URL.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "documents",
+                "generate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"template\": {\n    \"id\": \"<integer>\",\n    \"data\": \"<object>\"\n  },\n  \"data\": \"<object>\",\n  \"format\": \"pdf\",\n  \"output\": \"base64\",\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1f98eb19-db2b-4461-8c97-9365190cf921",
+              "name": "The generated document.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents",
+                    "generate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"template\": {\n    \"id\": \"<integer>\",\n    \"data\": \"<object>\"\n  },\n  \"data\": \"<object>\",\n  \"format\": \"pdf\",\n  \"output\": \"base64\",\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"response\": \"string\",\n  \"meta\": {\n    \"name\": \"string\",\n    \"display_name\": \"string\",\n    \"encoding\": \"string\",\n    \"output_type\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0250488a-a5f6-48d0-8c16-9225ef6e3903",
+          "name": "Generate document asynchronously",
+          "request": {
+            "name": "Generate document asynchronously",
+            "description": {
+              "content": "Merges a template with data as an asynchronous job and notifies a callback URL on completion.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "documents",
+                "generate",
+                "async"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"template\": {\n    \"id\": \"<integer>\",\n    \"data\": \"<object>\"\n  },\n  \"data\": \"<object>\",\n  \"format\": \"pdf\",\n  \"output\": \"base64\",\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0e7bd9f6-f78c-40f2-b278-26828a35fcbc",
+              "name": "The accepted async job.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents",
+                    "generate",
+                    "async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"template\": {\n    \"id\": \"<integer>\",\n    \"data\": \"<object>\"\n  },\n  \"data\": \"<object>\",\n  \"format\": \"pdf\",\n  \"output\": \"base64\",\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"response\": {\n    \"job_id\": \"string\",\n    \"status\": \"completed\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f24cd601-517a-41ca-8e9c-a99414bbe945",
+          "name": "Generate batch of documents",
+          "request": {
+            "name": "Generate batch of documents",
+            "description": {
+              "content": "Merges multiple templates with data into a single document.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "documents",
+                "generate",
+                "batch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"template\": {\n      \"id\": \"<integer>\",\n      \"data\": \"<object>\"\n    },\n    \"data\": \"<object>\",\n    \"format\": \"pdf\",\n    \"output\": \"base64\",\n    \"name\": \"<string>\"\n  },\n  {\n    \"template\": {\n      \"id\": \"<integer>\",\n      \"data\": \"<object>\"\n    },\n    \"data\": \"<object>\",\n    \"format\": \"pdf\",\n    \"output\": \"base64\",\n    \"name\": \"<string>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9cedb9d7-95b8-48be-8185-2b38d50261d2",
+              "name": "The generated document.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents",
+                    "generate",
+                    "batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"template\": {\n      \"id\": \"<integer>\",\n      \"data\": \"<object>\"\n    },\n    \"data\": \"<object>\",\n    \"format\": \"pdf\",\n    \"output\": \"base64\",\n    \"name\": \"<string>\"\n  },\n  {\n    \"template\": {\n      \"id\": \"<integer>\",\n      \"data\": \"<object>\"\n    },\n    \"data\": \"<object>\",\n    \"format\": \"pdf\",\n    \"output\": \"base64\",\n    \"name\": \"<string>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"response\": \"string\",\n  \"meta\": {\n    \"name\": \"string\",\n    \"display_name\": \"string\",\n    \"encoding\": \"string\",\n    \"output_type\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b141964-c648-4feb-a07a-e92a819b5cbf",
+          "name": "Generate batch of documents asynchronously",
+          "request": {
+            "name": "Generate batch of documents asynchronously",
+            "description": {
+              "content": "Batch document generation executed as an asynchronous job with a callback.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "documents",
+                "generate",
+                "batch",
+                "async"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"template\": {\n      \"id\": \"<integer>\",\n      \"data\": \"<object>\"\n    },\n    \"data\": \"<object>\",\n    \"format\": \"pdf\",\n    \"output\": \"base64\",\n    \"name\": \"<string>\"\n  },\n  {\n    \"template\": {\n      \"id\": \"<integer>\",\n      \"data\": \"<object>\"\n    },\n    \"data\": \"<object>\",\n    \"format\": \"pdf\",\n    \"output\": \"base64\",\n    \"name\": \"<string>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4dba1d87-0a4c-460b-a488-c8314e3ce708",
+              "name": "The accepted async job.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents",
+                    "generate",
+                    "batch",
+                    "async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"template\": {\n      \"id\": \"<integer>\",\n      \"data\": \"<object>\"\n    },\n    \"data\": \"<object>\",\n    \"format\": \"pdf\",\n    \"output\": \"base64\",\n    \"name\": \"<string>\"\n  },\n  {\n    \"template\": {\n      \"id\": \"<integer>\",\n      \"data\": \"<object>\"\n    },\n    \"data\": \"<object>\",\n    \"format\": \"pdf\",\n    \"output\": \"base64\",\n    \"name\": \"<string>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"response\": {\n    \"job_id\": \"string\",\n    \"status\": \"completed\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eedc6060-c160-4e4f-96df-833f78b7f47c",
+          "name": "Get async job status",
+          "request": {
+            "name": "Get async job status",
+            "description": {
+              "content": "Returns the current status of an asynchronous document generation job.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "documents",
+                "async",
+                ":jobId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "jobId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "14934447-3fe0-4c88-a487-794ead4316d8",
+              "name": "The async job status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents",
+                    "async",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"response\": {\n    \"job_id\": \"string\",\n    \"status\": \"completed\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b91ae001-a4e5-4344-83e5-ebf92aba5ed4",
+          "name": "Get documents",
+          "request": {
+            "name": "Get documents",
+            "description": {
+              "content": "Returns a list of generated documents created by the authorized workspace and stored in PDF Generator API.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "documents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "53d295a4-e3ac-40fc-afa3-3ae490273115",
+              "name": "A list of stored documents.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"response\": [\n    {\n      \"public_id\": \"string\",\n      \"name\": \"string\",\n      \"created_at\": \"string\"\n    },\n    {\n      \"public_id\": \"string\",\n      \"name\": \"string\",\n      \"created_at\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "24d4c47b-3cf0-4559-b8f5-a234f777915f",
+          "name": "Store document",
+          "request": {
+            "name": "Store document",
+            "description": {
+              "content": "Uploads a PDF to Document Storage via a URL or a base64-encoded string.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "documents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dc11f51e-9bcb-4da5-8564-6cec07b6cb6f",
+              "name": "The stored document.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"public_id\": \"string\",\n  \"name\": \"string\",\n  \"created_at\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6a822de5-f6af-4f63-a22d-464abf8de9ec",
+          "name": "Get document",
+          "request": {
+            "name": "Get document",
+            "description": {
+              "content": "Retrieves a single document from Document Storage.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "documents",
+                ":publicId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "publicId",
+                  "description": "(Required) Public identifier of a stored document."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3d775cc3-a047-47de-9220-340a21a2b567",
+              "name": "The requested document.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents",
+                    ":publicId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "publicId",
+                      "description": "(Required) Public identifier of a stored document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"public_id\": \"string\",\n  \"name\": \"string\",\n  \"created_at\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ee019156-8fb3-43ff-b80e-77fb18639d55",
+          "name": "Get document actions",
+          "request": {
+            "name": "Get document actions",
+            "description": {
+              "content": "Returns a list of actions performed on a stored document.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "documents",
+                ":publicId",
+                "actions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "publicId",
+                  "description": "(Required) Public identifier of a stored document."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7eb4df3c-e660-434c-a250-3fe620d27e43",
+              "name": "A list of document actions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents",
+                    ":publicId",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "publicId",
+                      "description": "(Required) Public identifier of a stored document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7a0b0572-def9-4de9-9418-1cba02d01aa9",
+          "name": "Delete document",
+          "request": {
+            "name": "Delete document",
+            "description": {
+              "content": "Removes a document from Document Storage.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "documents",
+                ":publicId",
+                "actions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "publicId",
+                  "description": "(Required) Public identifier of a stored document."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0623b642-e54e-44ae-985a-f7bccecd96d3",
+              "name": "Document deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents",
+                    ":publicId",
+                    "actions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "publicId",
+                      "description": "(Required) Public identifier of a stored document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0df592f7-4109-41f5-b09c-765dfca5a225",
+          "name": "Get document versions",
+          "request": {
+            "name": "Get document versions",
+            "description": {
+              "content": "Returns a list of versions for a stored document.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "documents",
+                ":publicId",
+                "versions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "publicId",
+                  "description": "(Required) Public identifier of a stored document."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a502bd4c-e152-4e82-bf8c-890f9c608565",
+              "name": "A list of document versions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "documents",
+                    ":publicId",
+                    "versions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "publicId",
+                      "description": "(Required) Public identifier of a stored document."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://us1.pdfgeneratorapi.com/api/v4",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "72b5d806-fd1b-4a01-979c-96c6dd454ec6",
+    "name": "PDF Generator Documents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Template-based document and PDF generation API. Merge JSON data with reusable templates to produce PDFs and other documents synchronously, asynchronously, or in batches, manage templates and their data fields, and partition work across multi-tenant workspaces. All requests are authenticated with a short-lived JSON Web Token (JWT) signed (HS256) using your API secret, with your API key as the issuer (iss) and the workspace identifier as the subject (sub).\n\nContact Support:\n Name: PDF Generator API Support\n Email: support@pdfgeneratorapi.com",
+      "type": "text/plain"
+    }
+  }
+}
