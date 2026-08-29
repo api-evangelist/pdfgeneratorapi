@@ -6,6 +6,18 @@ description: PDF Generator API is a template-based document and PDF generation s
   A drag-and-drop browser template editor plus a REST API let developers merge JSON
   data with reusable templates to produce PDFs, HTML, and other documents synchronously,
   asynchronously, or in batches, organized across multi-tenant workspaces.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
