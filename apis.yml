@@ -37,6 +37,12 @@ tags:
 - Document Generation
 - Templates
 - Reporting
+- Workspace
+tags_raw:
+- PDF
+- Document Generation
+- Templates
+- Reporting
 - Workspaces
 created: '2026-06-25'
 modified: '2026-06-25'
@@ -92,6 +98,8 @@ apis:
   humanURL: https://docs.pdfgeneratorapi.com/v4/
   baseURL: https://us1.pdfgeneratorapi.com/api/v4
   tags:
+  - Workspace
+  tags_raw:
   - Workspaces
   properties:
   - type: OpenAPI
