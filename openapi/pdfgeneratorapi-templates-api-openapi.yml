@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: PDF Generator Documents Templates API
+  title: PDF Generator Templates API
   description: Template-based document and PDF generation API. Merge JSON data with reusable templates to produce PDFs and other documents synchronously, asynchronously, or in batches, manage templates and their data fields, and partition work across multi-tenant workspaces. All requests are authenticated with a short-lived JSON Web Token (JWT) signed (HS256) using your API secret, with your API key as the issuer (iss) and the workspace identifier as the subject (sub).
   termsOfService: https://pdfgeneratorapi.com/terms
   contact:
@@ -260,13 +260,6 @@ components:
           type: string
         updated_at:
           type: string
-    TemplateResponse:
-      type: object
-      properties:
-        response:
-          $ref: '#/components/schemas/Template'
-        meta:
-          type: object
     TemplateDefinition:
       type: object
       properties:
@@ -278,6 +271,13 @@ components:
           type: array
           items:
             type: object
+    TemplateResponse:
+      type: object
+      properties:
+        response:
+          $ref: '#/components/schemas/Template'
+        meta:
+          type: object
   parameters:
     TemplateId:
       name: templateId

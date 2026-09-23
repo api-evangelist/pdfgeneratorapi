@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: PDF Generator Documents Workspaces API
+  title: PDF Generator Workspaces API
   description: Template-based document and PDF generation API. Merge JSON data with reusable templates to produce PDFs and other documents synchronously, asynchronously, or in batches, manage templates and their data fields, and partition work across multi-tenant workspaces. All requests are authenticated with a short-lived JSON Web Token (JWT) signed (HS256) using your API secret, with your API key as the issuer (iss) and the workspace identifier as the subject (sub).
   termsOfService: https://pdfgeneratorapi.com/terms
   contact:
