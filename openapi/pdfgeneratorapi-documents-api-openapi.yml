@@ -211,33 +211,15 @@ paths:
         '200':
           description: A list of document versions.
 components:
+  parameters:
+    PublicId:
+      name: publicId
+      in: path
+      required: true
+      description: Public identifier of a stored document.
+      schema:
+        type: string
   schemas:
-    Document:
-      type: object
-      properties:
-        public_id:
-          type: string
-        name:
-          type: string
-        created_at:
-          type: string
-    GenerateResponse:
-      type: object
-      properties:
-        response:
-          type: string
-          description: Base64-encoded document or a public URL, depending on output.
-        meta:
-          type: object
-          properties:
-            name:
-              type: string
-            display_name:
-              type: string
-            encoding:
-              type: string
-            output_type:
-              type: string
     GenerateRequest:
       type: object
       required:
@@ -272,6 +254,15 @@ components:
         data:
           type: object
           description: JSON data merged into the template.
+    Document:
+      type: object
+      properties:
+        public_id:
+          type: string
+        name:
+          type: string
+        created_at:
+          type: string
     AsyncJobResponse:
       type: object
       properties:
@@ -287,14 +278,23 @@ components:
               - processing
               - completed
               - failed
-  parameters:
-    PublicId:
-      name: publicId
-      in: path
-      required: true
-      description: Public identifier of a stored document.
-      schema:
-        type: string
+    GenerateResponse:
+      type: object
+      properties:
+        response:
+          type: string
+          description: Base64-encoded document or a public URL, depending on output.
+        meta:
+          type: object
+          properties:
+            name:
+              type: string
+            display_name:
+              type: string
+            encoding:
+              type: string
+            output_type:
+              type: string
   securitySchemes:
     JWT:
       type: http

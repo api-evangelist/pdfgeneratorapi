@@ -234,12 +234,24 @@ paths:
                 type: object
 components:
   schemas:
-    EditorData:
+    TemplateResponse:
       type: object
       properties:
-        data:
+        response:
+          $ref: '#/components/schemas/Template'
+        meta:
           type: object
-          description: Sample data to preview inside the editor.
+    TemplateDefinition:
+      type: object
+      properties:
+        name:
+          type: string
+        layout:
+          type: object
+        pages:
+          type: array
+          items:
+            type: object
     Template:
       type: object
       properties:
@@ -260,24 +272,12 @@ components:
           type: string
         updated_at:
           type: string
-    TemplateDefinition:
+    EditorData:
       type: object
       properties:
-        name:
-          type: string
-        layout:
+        data:
           type: object
-        pages:
-          type: array
-          items:
-            type: object
-    TemplateResponse:
-      type: object
-      properties:
-        response:
-          $ref: '#/components/schemas/Template'
-        meta:
-          type: object
+          description: Sample data to preview inside the editor.
   parameters:
     TemplateId:
       name: templateId
