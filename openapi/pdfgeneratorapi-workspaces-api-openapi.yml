@@ -83,6 +83,14 @@ paths:
         '200':
           description: Workspace deleted.
 components:
+  parameters:
+    WorkspaceIdentifier:
+      name: workspaceIdentifier
+      in: path
+      required: true
+      description: Identifier of the workspace.
+      schema:
+        type: string
   schemas:
     Workspace:
       type: object
@@ -96,14 +104,6 @@ components:
           type: string
         updated_at:
           type: string
-  parameters:
-    WorkspaceIdentifier:
-      name: workspaceIdentifier
-      in: path
-      required: true
-      description: Identifier of the workspace.
-      schema:
-        type: string
   securitySchemes:
     JWT:
       type: http

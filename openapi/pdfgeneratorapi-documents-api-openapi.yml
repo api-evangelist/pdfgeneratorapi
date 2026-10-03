@@ -211,15 +211,33 @@ paths:
         '200':
           description: A list of document versions.
 components:
-  parameters:
-    PublicId:
-      name: publicId
-      in: path
-      required: true
-      description: Public identifier of a stored document.
-      schema:
-        type: string
   schemas:
+    GenerateResponse:
+      type: object
+      properties:
+        response:
+          type: string
+          description: Base64-encoded document or a public URL, depending on output.
+        meta:
+          type: object
+          properties:
+            name:
+              type: string
+            display_name:
+              type: string
+            encoding:
+              type: string
+            output_type:
+              type: string
+    Document:
+      type: object
+      properties:
+        public_id:
+          type: string
+        name:
+          type: string
+        created_at:
+          type: string
     GenerateRequest:
       type: object
       required:
@@ -254,15 +272,6 @@ components:
         data:
           type: object
           description: JSON data merged into the template.
-    Document:
-      type: object
-      properties:
-        public_id:
-          type: string
-        name:
-          type: string
-        created_at:
-          type: string
     AsyncJobResponse:
       type: object
       properties:
@@ -278,23 +287,14 @@ components:
               - processing
               - completed
               - failed
-    GenerateResponse:
-      type: object
-      properties:
-        response:
-          type: string
-          description: Base64-encoded document or a public URL, depending on output.
-        meta:
-          type: object
-          properties:
-            name:
-              type: string
-            display_name:
-              type: string
-            encoding:
-              type: string
-            output_type:
-              type: string
+  parameters:
+    PublicId:
+      name: publicId
+      in: path
+      required: true
+      description: Public identifier of a stored document.
+      schema:
+        type: string
   securitySchemes:
     JWT:
       type: http
