@@ -234,6 +234,13 @@ paths:
                 type: object
 components:
   schemas:
+    TemplateResponse:
+      type: object
+      properties:
+        response:
+          $ref: '#/components/schemas/Template'
+        meta:
+          type: object
     TemplateDefinition:
       type: object
       properties:
@@ -271,13 +278,6 @@ components:
         data:
           type: object
           description: Sample data to preview inside the editor.
-    TemplateResponse:
-      type: object
-      properties:
-        response:
-          $ref: '#/components/schemas/Template'
-        meta:
-          type: object
   parameters:
     TemplateId:
       name: templateId

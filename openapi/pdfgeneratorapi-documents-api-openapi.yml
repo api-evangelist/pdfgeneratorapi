@@ -212,32 +212,6 @@ paths:
           description: A list of document versions.
 components:
   schemas:
-    GenerateResponse:
-      type: object
-      properties:
-        response:
-          type: string
-          description: Base64-encoded document or a public URL, depending on output.
-        meta:
-          type: object
-          properties:
-            name:
-              type: string
-            display_name:
-              type: string
-            encoding:
-              type: string
-            output_type:
-              type: string
-    Document:
-      type: object
-      properties:
-        public_id:
-          type: string
-        name:
-          type: string
-        created_at:
-          type: string
     GenerateRequest:
       type: object
       required:
@@ -272,6 +246,23 @@ components:
         data:
           type: object
           description: JSON data merged into the template.
+    GenerateResponse:
+      type: object
+      properties:
+        response:
+          type: string
+          description: Base64-encoded document or a public URL, depending on output.
+        meta:
+          type: object
+          properties:
+            name:
+              type: string
+            display_name:
+              type: string
+            encoding:
+              type: string
+            output_type:
+              type: string
     AsyncJobResponse:
       type: object
       properties:
@@ -287,6 +278,15 @@ components:
               - processing
               - completed
               - failed
+    Document:
+      type: object
+      properties:
+        public_id:
+          type: string
+        name:
+          type: string
+        created_at:
+          type: string
   parameters:
     PublicId:
       name: publicId
