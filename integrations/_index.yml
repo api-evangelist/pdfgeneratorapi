@@ -58,3 +58,16 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: pdfgeneratorapi-bubble-own
+  label: Bubble (own)
+  partner: bubble
+  partner_name: Bubble (own)
+  category: Api
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://bubble.io/plugin/pdf-generator-api-1621422101542x543842438658129900
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null

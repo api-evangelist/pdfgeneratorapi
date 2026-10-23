@@ -57,6 +57,23 @@ edges:
   detected: '2026-10-23'
   detected_by: mirror-platform-listings.py
   category: Airtable extension
+- partner_name: Bubble (own)
+  partner: bubble
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://bubble.io/plugin/pdf-generator-api-1621422101542x543842438658129900
+  mirror_of: bubble/integrations/bubble-integration-edges.yml
+  apps:
+  - PDF Generator API
+  listing_count: 1
+  detected: '2026-10-23'
+  detected_by: mirror-platform-listings.py
+  category: Api
 generated: '2026-10-22'
 method: searched
 source:
@@ -66,3 +83,4 @@ checked:
 - https://api.apis.guru/v2/list.json
 - https://api.apis.guru/v2/providers.json
 - airtable/integrations/airtable-integration-edges.yml
+- bubble/integrations/bubble-integration-edges.yml
